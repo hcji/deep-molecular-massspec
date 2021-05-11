@@ -104,8 +104,11 @@ def update_mols_with_spectra(mol_list, spectra_array):
                      "spectra found %d." %
                      (len(mol_list), np.shape(spectra_array)[0]))
   for mol, spectrum in zip(mol_list, spectra_array):
-    spec_array_text = feature_utils.convert_spectrum_array_to_string(spectrum)
-    mol.SetProp(PREDICTED_SPECTRA_PROP_NAME, spec_array_text)
+    try:
+        spec_array_text = feature_utils.convert_spectrum_array_to_string(spectrum)
+        mol.SetProp(PREDICTED_SPECTRA_PROP_NAME, spec_array_text)
+    except:
+        continue
   return mol_list
 
 
